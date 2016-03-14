@@ -1,0 +1,17 @@
+appnope==0.1.0
+boto3==1.2.6
+botocore==1.4.1
+decorator==4.0.9
+docutils==0.12
+futures==3.0.5
+gnureadline==6.3.3
+jmespath==0.9.0
+path.py==8.1.2
+pexpect==4.0.1
+pickleshare==0.6
+ptyprocess==0.5.1
+python-dateutil==2.5.0
+PyYAML==3.11
+simplegeneric==0.8.1
+six==1.10.0
+traitlets==4.1.0

@@ -1,0 +1,31 @@
+---
+ami: ami-837093e3
+instance_size: t2.micro
+instance_count: 1
+iam_user: gstest
+profile_name: gstest
+bucket_name: gstest.garfias.org
+keypair_name: gstest
+vpc_name: gstest
+ig_name: gsgw
+sg_name: gssg
+ingress_rules:
+  -
+    proto: tcp
+    from_port: 22
+    to_port: 22
+    from_ip: "0.0.0.0/0"
+  -
+    proto: tcp
+    from_port: 80
+    to_port: 80
+    from_ip: "0.0.0.0/0"
+user_data: |
+  #cloud-config
+  apt_upgrade: true
+  package_reboot_if_required: true
+  packages:
+    - docker.io
+  runcmd:
+    - sudo docker pull appcontainers/wordpress
+    - sudo docker run -d -it --name wordpress --restart always -h wordpress -p 80:80 -p 443:443 -e APP_NAME='testapp.com' -e APACHE_SVRALIAS='www.testapp.com localhost' -e MYSQL_SERVER='localhost' -e MYSQL_PASS='PAssw0rd' -e MYSQL_DB='testapp' -e APP_USER='admin' -e APP_PASS='PAssw0rd' -e WP_KEY='I Love Flappyjacks' -e ENV=production -e TERMTAG=WORDPRESS appcontainers/wordpress
